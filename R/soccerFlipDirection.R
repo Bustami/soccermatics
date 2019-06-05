@@ -44,7 +44,9 @@ soccerFlipDirection <- function(df, lengthPitch = 105, widthPitch = 68, teamToFl
   } else {
     df <- df %>%
       mutate(!!x := if_else(!!sym(team) == teamToFlip & !!sym(period) %in% periodToFlip, lengthPitch - !!sym(x), !!sym(x)),
-             !!y := if_else(!!sym(team) == teamToFlip & !!sym(period) %in% periodToFlip, widthPitch - !!sym(y), !!sym(y)))
+             #!!y := if_else(!!sym(team) == teamToFlip & !!sym(period) %in% periodToFlip, widthPitch - !!sym(y), !!sym(y)))
+             # I think y coordinate shouldn't be changed. For example: I prefer Umtiti's goal for France vs Belgium match at Russia 2018 WC keep y position.
+             !!y := if_else(!!sym(team) == teamToFlip & !!sym(period) %in% periodToFlip, !!sym(y), !!sym(y)))
   }
   
   return(df)
